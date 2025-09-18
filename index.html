@@ -67,30 +67,57 @@
             color: #00d4ff;
         }
 
-        /* Hero Section */
+        /* Center top ribbon and hide logo (override defaults) */
+        /* Center the navbar in the top-middle and shrink to content on wide screens */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            max-width: 1100px;
+            z-index: 9999;
+            background: rgba(20, 25, 30, 0.92); /* slightly lighter navbar */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+            border-radius: 0 0 10px 10px;
+            padding: 8px 20px;
+        }
+
+        #navbar .nav-container { display:flex; align-items:center; justify-content:center; }
+        #navbar .nav-links { display:flex; gap:22px; margin:0; }
+        #navbar .logo { display:none !important; }
+
+        @media (max-width: 768px) {
+            #navbar { left:0; transform:none; width:100%; border-radius:0; padding:10px 12px; }
+            #navbar .nav-links { gap:12px; flex-wrap:wrap; justify-content:center; }
+        }
+
+        /* Hero Section: static background image (no animation) */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #0d1117 0%, #1c2128 50%, #21262d 100%);
+            background-image: url('vecteezy_futuristic-digital-display-with-glowing-blue-binary-code_57333030.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            color: #fff;
         }
 
-        .hero::before {
+        /* subtle overlay to keep text readable */
+        .hero::after {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%2300d4ff" opacity="0.1"/></svg>') repeat;
-            animation: float 20s infinite linear;
+            inset: 0;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+            z-index: 0;
+            pointer-events: none;
         }
 
-        @keyframes float {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
+        .hero .hero-content { z-index: 1; }
 
         .hero-content {
             text-align: center;
@@ -103,8 +130,11 @@
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #00d4ff, #0066cc);
+            /* warmer cyan-to-sky gradient for better contrast */
+            background: linear-gradient(135deg, #18b6e6, #2aa4f4);
+            background-clip: text;
             -webkit-background-clip: text;
+            color: transparent;
             -webkit-text-fill-color: transparent;
             animation: fadeInUp 1s ease;
         }
@@ -163,6 +193,13 @@
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Ensure hero CTAs are clickable and visible above overlay */
+        .hero .cta-buttons a {
+            display: inline-block;
+            position: relative;
+            z-index: 2;
         }
 
         /* Section Styles */
@@ -765,6 +802,32 @@
             font-size: 1.3rem;
         }
 
+        /* Compact bottom-right newsletter card */
+        .newsletter-mini {
+            position: fixed;
+            right: 24px;
+            bottom: 110px; /* sits above footer */
+            width: 300px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fb);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 1rem;
+            z-index: 2000;
+        }
+
+        .newsletter-mini h4 { margin: 0 0 0.25rem 0; color: #0066cc }
+        .newsletter-mini p { margin: 0 0 0.5rem 0; color: #666; font-size: 0.95rem }
+        .newsletter-mini .coming-soon-badge { display:inline-block; background:#ffb703; color:#102a43; padding:6px 10px; border-radius:8px; font-weight:700 }
+
+        @media (max-width: 900px) {
+            .newsletter-mini { right: 16px; bottom: 80px; width: 260px; }
+        }
+
+        @media (max-width: 480px) {
+            .newsletter-mini { display: none; }
+        }
+
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -795,9 +858,311 @@
             font-weight: 500;
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        /* Experience Section Styles */
+        .experience-section {
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.95), rgba(28, 33, 40, 0.95)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="bg" cx="50%" cy="50%"><stop offset="0%" style="stop-color:%2300d4ff;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%23000;stop-opacity:0"/></radialGradient></defs><rect width="1000" height="1000" fill="url(%23bg)"/><g opacity="0.3"><circle cx="100" cy="100" r="2" fill="%2300d4ff"/><circle cx="200" cy="150" r="1" fill="%2300d4ff"/><circle cx="300" cy="80" r="1.5" fill="%2300d4ff"/><circle cx="500" cy="200" r="1" fill="%2300d4ff"/><circle cx="700" cy="120" r="2" fill="%2300d4ff"/><circle cx="800" cy="180" r="1" fill="%2300d4ff"/><circle cx="150" cy="300" r="1.5" fill="%2300d4ff"/><circle cx="600" cy="350" r="1" fill="%2300d4ff"/><circle cx="400" cy="400" r="2" fill="%2300d4ff"/><circle cx="900" cy="300" r="1" fill="%2300d4ff"/></g></svg>');
+            background-size: cover, 100% 100%;
+            background-attachment: fixed;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="binary" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="2" y="8" font-family="monospace" font-size="6" fill="%2300d4ff" opacity="0.1">01</text><text x="12" y="16" font-family="monospace" font-size="6" fill="%2300d4ff" opacity="0.1">10</text></pattern></defs><rect width="100" height="100" fill="url(%23binary)"/></svg>');
+            opacity: 0.05;
+            animation: binaryFlow 30s linear infinite;
+        }
+
+        @keyframes binaryFlow {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(-100px) translateX(-50px); }
+        }
+
+        .experience-section .section-title {
+            color: #fff;
+            background: linear-gradient(135deg, #00d4ff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .experience-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .experience-header {
+            display: flex;
+            align-items: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .experience-header:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .company-timeline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 2rem;
+            position: relative;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #00d4ff, #0066cc);
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .timeline-line {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, #00d4ff, transparent);
+            margin-top: 10px;
+        }
+
+        .experience-item:last-child .timeline-line {
+            display: none;
+        }
+
+        .experience-main {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-info {
+            flex: 1;
+        }
+
+        .job-title {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .job-duration {
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-focus {
+            color: #00d4ff;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .expand-icon {
+            margin-left: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-icon i {
+            font-size: 1.2rem;
+            color: #00d4ff;
+        }
+
+        .experience-item.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .experience-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 15px 15px;
+            margin-top: -15px;
+            padding-top: 15px;
+        }
+
+        .experience-item.expanded .experience-details {
+            max-height: 2000px;
+            padding: 2rem;
+        }
+
+        .experience-overview {
+            margin-bottom: 2rem;
+        }
+
+        .tech-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-highlights .tech-tag {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .key-achievements h4 {
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .key-achievements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #e6edf3;
+            line-height: 1.5;
+        }
+
+        .key-achievements li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.4);
+        }
+
+        .project-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d4ff20, #0066cc20);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon i {
+            font-size: 1.3rem;
+            color: #00d4ff;
+        }
+
+        .project-card h4 {
+            color: #fff;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .project-card p {
+            color: #e6edf3;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .project-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .project-metrics span {
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            padding: 0.3rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-metrics i {
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .experience-header {
+                padding: 1.5rem;
+            }
+
+            .company-timeline {
+                margin-right: 1rem;
+            }
+
+            .experience-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .expand-icon {
+                margin: 1rem 0 0 0;
+                align-self: flex-end;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-highlights {
+                justify-content: flex-start;
+            }
         }
 
         /* Loading animation */
@@ -807,17 +1172,139 @@
             transition: all 0.6s ease;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+                .fade-in.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                }
+                </style>
+
+        <style>
+        /* Projects accordion styles */
+        .accordion {
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: visible; /* allow inner content to show without being clipped */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            background: transparent;
+            border: 1px solid rgba(0,0,0,0.04);
         }
-    </style>
+
+        .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+        .accordion-button {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1rem;
+            text-align: left;
+            background: transparent;
+            border: none;
+            border-left: 4px solid transparent;
+            color: #0b0b0b;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.18s ease;
+            display: block;
+            font-weight: 700;
+        }
+
+        .accordion-button:hover,
+        .accordion-button.active {
+            background: rgba(0,212,255,0.03);
+            border-left-color: #00d4ff;
+            color: #0066cc;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.32s ease;
+            padding: 1rem 1rem; /* keep padding constant to avoid reflow clipping */
+            box-sizing: border-box;
+            color: #333;
+            background: transparent;
+            will-change: max-height;
+            margin-top: 6px; /* small gap between header and content to avoid overlap */
+        }
+
+        .accordion-content.show {
+            overflow: visible; /* set so linter doesn't warn; actual height is controlled by inline max-height */
+        }
+
+        .accordion-content ul { margin: 0 0 0 1rem; padding: 0; }
+        .accordion-content li { margin-bottom: 0.6rem; line-height:1.5 }
+
+        /* small helper for project tag look */
+        .project-tag { display:inline-block; padding:2px 6px; border-radius:6px; background:#f1f5f9; border:1px solid rgba(0,0,0,0.04); font-size:0.8rem; margin-top:6px }
+        </style>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = Array.from(document.querySelectorAll('.accordion-button'));
+
+            buttons.forEach((button, i) => {
+                const content = button.nextElementSibling;
+                // ensure content is hidden
+                content.classList.remove('show');
+                content.style.maxHeight = null;
+
+                // set accessible ids/attrs
+                const contentId = content.id || `accordion-content-${i}`;
+                content.id = contentId;
+                button.setAttribute('aria-controls', contentId);
+                button.setAttribute('aria-expanded', 'false');
+
+                // helper to collapse a content panel
+                const collapse = (c, b) => {
+                    c.style.maxHeight = c.scrollHeight + 'px'; // set to current height to enable transition
+                    // force reflow
+                    void c.offsetHeight;
+                    c.style.maxHeight = '0px';
+                    c.classList.remove('show');
+                    b.classList.remove('active');
+                    b.setAttribute('aria-expanded', 'false');
+                };
+
+                // helper to expand a content panel
+                const expand = (c, b) => {
+                    c.classList.add('show');
+                    b.classList.add('active');
+                    b.setAttribute('aria-expanded', 'true');
+                    const target = c.scrollHeight + 36; // offset to prevent clipping
+                    c.style.maxHeight = target + 'px';
+                };
+
+                // cleanup after transition: when collapsed, remove inline max-height to allow natural height changes
+                content.addEventListener('transitionend', (ev) => {
+                    if (ev.propertyName === 'max-height') {
+                        if (!content.classList.contains('show')) {
+                            content.style.maxHeight = null;
+                        } else {
+                            // keep the inline max-height so content remains visible during dynamic changes
+                        }
+                    }
+                });
+
+                button.addEventListener('click', () => {
+                    const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+                    // Toggle only the clicked panel to allow multiple panels open
+                    if (isOpen) {
+                        collapse(content, button);
+                    } else {
+                        expand(content, button);
+                    }
+                });
+            });
+        });
+</script>
 </head>
 <body>
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">Arijit M.</div>
+            <!-- logo removed per user request -->
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -913,79 +1400,15 @@
                     </div>
                 </div>
                 
-                <div class="tools-cta">
+                <!-- <div class="tools-cta">
                     <p>Want to be notified when these tools launch? Subscribe to our newsletter below!</p>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section id="newsletter" class="newsletter">
-        <div class="section">
-            <h2 class="section-title fade-in">Stay Updated</h2>
-            <div class="newsletter-content fade-in">
-                <div class="newsletter-hero">
-                    <div class="newsletter-icon">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
-                    <h3>AI Insights Newsletter</h3>
-                    <p>Get weekly insights on the latest in AI, machine learning trends, practical tutorials, and behind-the-scenes looks at cutting-edge projects. Join 1000+ AI professionals who trust my expertise.</p>
-                </div>
-                
-                <div class="newsletter-form">
-                    <form id="newsletterForm">
-                        <div class="form-group">
-                            <input type="email" id="email" placeholder="Enter your email address" required>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-envelope"></i>
-                                Subscribe Now
-                            </button>
-                        </div>
-                        <p class="form-note">
-                            <i class="fas fa-shield-alt"></i>
-                            No spam, ever. Unsubscribe anytime. Your privacy is protected.
-                        </p>
-                    </form>
-                    <div id="subscriptionSuccess" class="success-message" style="display: none;">
-                        <i class="fas fa-check-circle"></i>
-                        <h4>Successfully Subscribed!</h4>
-                        <p>Thank you for subscribing! You'll receive your first newsletter soon.</p>
-                    </div>
-                </div>
-                
-                <div class="newsletter-benefits">
-                    <h4>What you'll get:</h4>
-                    <div class="benefits-grid">
-                        <div class="benefit-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <span>Latest AI Trends & Insights</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-code"></i>
-                            <span>Practical Code Examples</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-book"></i>
-                            <span>In-depth Tutorials</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-rocket"></i>
-                            <span>Industry Best Practices</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-users"></i>
-                            <span>Community Discussions</span>
-                        </div>
-                        <div class="benefit-item">
-                            <i class="fas fa-star"></i>
-                            <span>Exclusive Resources</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Newsletter Section (moved to compact bottom-right card before footer) -->
+    <!-- Original newsletter moved into a compact 'Coming Soon' card. Removed large inline form markup. -->
 
     <!-- About Section -->
     <section id="about" class="about">
@@ -995,7 +1418,7 @@
                 <div>
                     <div class="stats">
                         <div class="stat-item">
-                            <div class="stat-number">8+</div>
+                            <div class="stat-number">9+</div>
                             <div class="stat-label">Years Experience</div>
                         </div>
                         <div class="stat-item">
@@ -1003,8 +1426,8 @@
                             <div class="stat-label">Projects Delivered</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">100K+</div>
-                            <div class="stat-label">Records Processed</div>
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Years Analytics Experience</div>
                         </div>
                     </div>
                 </div>
@@ -1169,28 +1592,61 @@
 
     <!-- Projects Section -->
     <section id="projects" class="section">
-        <h2 class="section-title fade-in">Key Projects</h2>
-        <div class="projects-grid fade-in">
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Demand Forecasting System</div>
-                    <div class="project-type">Time Series • ML</div>
-                </div>
-                <div class="project-content">
-                    <p class="project-description">
-                        Advanced forecasting model using Prophet algorithm and Dynamic Time Warping for seasonality transfer. Achieved 25% improvement in forecasting accuracy for beverage industry client.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Prophet</span>
-                        <span class="tech-tag">DTW</span>
-                        <span class="tech-tag">Time Series</span>
-                        <span class="tech-tag">Statistical Analysis</span>
-                        <span class="tech-tag">GCP</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <h2 class="section-title fade-in">Key Projects by Company</h2>
+  <div class="accordion">
+
+    <div class="accordion-item">
+      <button class="accordion-button">HCL Technologies at AbbVie Inc.</button>
+      <div class="accordion-content">
+        <ul>
+          <li><strong>Computer Assisted Medical Coding</strong>: Built agentic AI using DPO to identify ICD-10-CM codes on over 100,000 charts. Fine-tuned PHI-4 models reducing error rates by 30% and achieved 40% reduction in query resolution time.</li>
+          <li><strong>LLM-Ops/Log Processing Pipeline</strong>: Kubernetes monitoring and LLM stress testing using Locust. Processed over million log files per day with 99.9% system uptime and automated anomaly detection.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-button">Accenture</button>
+      <div class="accordion-content">
+        <ul>
+          <li><strong>Hallucination Minimized Framework for Financial Analysis</strong>: Pioneered RAG framework with multi-agent system, increasing data reliability by 40% and decision accuracy by 35%. Co-authored arXiv publication (2405.03963) on sustainability information extraction.</li>
+          <li><strong>Lead Time Analysis and Fault Prediction for Wind Turbines</strong>: Used Databricks for vibration analysis and clustering algorithms for fault identification. Applied physics-based models with PySpark and Transformers to detect three major turbine inefficiencies.</li>
+          <li><strong>RAG-based Approach for Sustainability Data</strong>: Created SQL from natural language questions using BigQuery, Vertex AI, and GCP Cloud Functions for automated sustainability reporting and ESG risk assessment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-button">Quantiphi</button>
+      <div class="accordion-content">
+        <ul>
+          <li><strong>SCM Solution for Major Beverage Client</strong>: Delivered IoT system with predictive analytics for inventory management. Customized bounding box normalization leading to 35% increase in object recognition precision.</li>
+          <li><strong>Demand Forecast for Beverage Client</strong>: Built demand forecasting model with Prophet algorithm and Dynamic Time Warping for seasonality transfer, achieving 25% improvement in forecasting accuracy.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-button">Impetus Technologies</button>
+      <div class="accordion-content">
+        <ul>
+          <li><strong>Anomaly/Fraud Detection using RCF on AWS</strong>: Designed credit card fraud detection models using Random Cut Forest and Prophet for anomaly detection, improving fraud identification accuracy by 20%.</li>
+          <li><strong>Auto ML Pipeline</strong>: Strategized auto-ML workflows for pattern detection, shortening prototyping time by 50%. Designed automated ML pipeline with GCP AutoML and containerization.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-button">General Electric</button>
+      <div class="accordion-content">
+        <ul>
+          <li><strong>TPC-DS Benchmarking</strong>: Data Engineering project using Shell script and Hortonworks Data Platform for transformation workloads. Conducted performance testing reducing error rates by 30%.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -1215,7 +1671,7 @@
                     <div class="contact-item">
                         <i class="fab fa-github"></i>
                         <h3>GitHub</h3>
-                        <a href="https://github.com/ariji1" target="_blank">View my code</a>
+                        <a href="https://github.com/yourusername" target="_blank">View my code</a>
                     </div>
                     
                     <div class="contact-item">
@@ -1239,6 +1695,16 @@
         <p>&copy; 2025 Arijit Mukherjee. All rights reserved. | AI Solutions Architect</p>
         <p>Built with passion for innovation and excellence in artificial intelligence.</p>
     </footer>
+
+    <!-- Compact Newsletter mini card (coming soon) -->
+    <div class="newsletter-mini" aria-hidden="false">
+        <h4>AI Insights Newsletter</h4>
+        <p>Weekly AI trends, tutorials & project notes.</p>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:8px">
+            <span class="coming-soon-badge">Coming Soon</span>
+            <button class="btn btn-secondary" disabled style="opacity:0.9">Notify me</button>
+        </div>
+    </div>
 
     <script>
         // Smooth scrolling for navigation links
@@ -1425,129 +1891,54 @@
             });
         });
 
-        // Newsletter form handling
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Experience accordion functionality
+        function toggleExperience(companyId) {
+            const experienceItem = document.querySelector(`[data-company="${companyId}"]`);
+            const isExpanded = experienceItem.classList.contains('expanded');
             
-            const email = document.getElementById('email').value;
-            const form = this;
-            const successMessage = document.getElementById('subscriptionSuccess');
+            // Close all other expanded items
+            document.querySelectorAll('.experience-item.expanded').forEach(item => {
+                if (item !== experienceItem) {
+                    item.classList.remove('expanded');
+                }
+            });
             
-            // Simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Simulate form submission (replace with actual form handling)
-            form.style.display = 'none';
-            successMessage.style.display = 'block';
-            
-            // In a real implementation, you would send this to your newsletter service
-            console.log('Newsletter subscription:', email);
-            
-            // Optional: Reset form after 5 seconds
-            setTimeout(() => {
-                form.style.display = 'block';
-                successMessage.style.display = 'none';
-                form.reset();
-            }, 5000);
-        });
+            // Toggle current item
+            experienceItem.classList.toggle('expanded');
+        }
+
+        // Newsletter form handling (defensive: only attach if elements exist)
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const emailEl = document.getElementById('email');
+                const successMessage = document.getElementById('subscriptionSuccess');
+                if (!emailEl || !successMessage) return;
+
+                const email = emailEl.value;
+                const form = this;
+
+                // Simple email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+
+                // Simulate form submission (replace with actual form handling)
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                console.log('Newsletter subscription:', email);
+
+                // Optional: Reset form after 5 seconds
+                setTimeout(() => {
+                    form.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    form.reset();
+                }, 5000);
+            });
+        }
     </script>
 </body>
-</html>d">
-                <div class="project-header">
-                    <div class="project-title">Computer Assisted Medical Coding</div>
-                    <div class="project-type">Agentic AI • Healthcare</div>
-                </div>
-                <div class="project-content">
-                    <p class="project-description">
-                        Revolutionary AI system for automated ICD-10-CM code identification processing 100,000+ medical charts. Implemented DPO techniques and RAG pipelines achieving 40% faster query resolution and 30% error reduction.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">DPO</span>
-                        <span class="tech-tag">RAG</span>
-                        <span class="tech-tag">PHI-4</span>
-                        <span class="tech-tag">AWS SageMaker</span>
-                        <span class="tech-tag">Microsoft Copilot</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Hallucination-Minimized Financial Analysis</div>
-                    <div class="project-type">RAG Framework • FinTech</div>
-                </div>
-                <div class="project-content">
-                    <p class="project-description">
-                        Multi-agent RAG system for financial analysis improving data reliability by 40% and decision accuracy by 35%. Featured in arXiv publication for sustainability-related information extraction.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Multi-agent RAG</span>
-                        <span class="tech-tag">Snowflake</span>
-                        <span class="tech-tag">Azure DevOps</span>
-                        <span class="tech-tag">ESG Analysis</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Wind Turbine Fault Prediction</div>
-                    <div class="project-type">Predictive Analytics • IoT</div>
-                </div>
-                <div class="project-content">
-                    <p class="project-description">
-                        Advanced vibration analysis system using Databricks and physics-based models for predictive maintenance. Identified three major causes of turbine inefficiencies through ML clustering algorithms.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Databricks</span>
-                        <span class="tech-tag">PySpark</span>
-                        <span class="tech-tag">Clustering</span>
-                        <span class="tech-tag">Azure ML</span>
-                        <span class="tech-tag">Transformers</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">LLM-Ops Pipeline</div>
-                    <div class="project-type">MLOps • Monitoring</div>
-                </div>
-                <div class="project-content">
-                    <p class="project-description">
-                        Comprehensive monitoring and stress testing pipeline processing million+ log files daily. Achieved 99.9% system uptime with automated anomaly detection using statistical process control.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Kubernetes</span>
-                        <span class="tech-tag">Locust</span>
-                        <span class="tech-tag">Dynatrace</span>
-                        <span class="tech-tag">Cloudera</span>
-                        <span class="tech-tag">Prometheus</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-title">Sustainability Data RAG</div>
-                    <div class="project-type">NLP • ESG</div>
-                </div>
-                <div class="project-content">
-                    <p class="project-description">
-                        Natural language to SQL system for automated sustainability reporting. Leveraged BigQuery, Vertex AI, and Text Bison for ESG risk assessment with statistical validation frameworks.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">BigQuery</span>
-                        <span class="tech-tag">Vertex AI</span>
-                        <span class="tech-tag">Text Bison</span>
-                        <span class="tech-tag">GCP Functions</span>
-                        <span class="tech-tag">ESG</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-car
+</html>
