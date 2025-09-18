@@ -1,3 +1,0 @@
-Backup of index_v5.html before requested revert.
-
-If you want the exact previous version restored, please confirm if there's a Git commit to revert to, or I will manually revert the edits I applied (remove hero-background section and restore original .hero::before to SVG-only).
