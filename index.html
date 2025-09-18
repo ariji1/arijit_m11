@@ -1219,13 +1219,11 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.32s ease;
-            padding: 1rem 1rem; /* keep padding constant to avoid reflow clipping */
+            transition: max-height 0.32s ease, padding 0.32s ease;
+            padding: 0 1rem;  /* collapsed: no vertical padding */
             box-sizing: border-box;
             color: #333;
             background: transparent;
-            will-change: max-height;
-            margin-top: 6px; /* small gap between header and content to avoid overlap */
         }
 
         .accordion-content.show {
@@ -1271,7 +1269,7 @@
                     c.classList.add('show');
                     b.classList.add('active');
                     b.setAttribute('aria-expanded', 'true');
-                    const target = c.scrollHeight + 36; // offset to prevent clipping
+                    const target = c.scrollHeight; // use natural height
                     c.style.maxHeight = target + 'px';
                 };
 
